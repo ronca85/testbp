@@ -1,0 +1,91 @@
+// ==========================================================================
+// Elements / Document
+// ==========================================================================
+
+:root {
+
+    // Grid
+    --grid-columns      : 4;
+    --grid-gutter       : #{rem(10px)};
+    --grid-gutter-half  : calc(0.5 * var(--grid-gutter));
+    --grid-margin       : 0px;
+
+    @media (min-width: $from-small) {
+        --grid-columns  : 12;
+        --grid-gutter   : #{rem(16px)};
+        --grid-margin   : #{rem(20px)};
+    }
+}
+
+//
+// Simple page-level setup.
+//
+// 1. Include web fonts
+// 2. Ensure the page always fills at least the entire height of the viewport.
+// 3. Set the default `font-size` and `line-height` for the entire project,
+//    sourced from our default variables.
+
+@include font-faces($font-faces, $font-dir); // [1]
+
+html {
+    min-height: 100%; // [2]
+    line-height: $line-height; // [3]
+    font-family: ff("sans");
+    color: $font-color;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media (max-width: $to-small) {
+        font-size: $font-size - 2px;
+    }
+
+    @media (min-width: $from-small) and (max-width: $to-medium) {
+        font-size: $font-size - 2px;
+    }
+
+    @media (min-width: $from-medium) and (max-width: $to-large) {
+        font-size: $font-size - 1px;
+    }
+
+    @media (min-width: $from-large) and (max-width: $to-huge) {
+        font-size: $font-size; // [1]
+    }
+
+    @media (min-width: $from-huge) and (max-width: $to-gigantic) {
+        font-size: $font-size + 1px;
+    }
+
+    @media (min-width: $from-gigantic) and (max-width: $to-colossal) {
+        font-size: $font-size + 2px;
+    }
+
+    @media (min-width: $from-colossal) {
+        font-size: $font-size + 4px;
+    }
+
+    &.is-loading {
+        cursor: wait;
+    }
+
+    &:not(.has-scroll-smooth) {
+        overflow-x: hidden
+    }
+
+    &.has-scroll-dragging {
+        user-select: none;
+    }
+}
+
+::selection {
+    background-color: $selection-background-color;
+    color: $selection-text-color;
+    text-shadow: none;
+}
+
+a {
+    color: $color-link;
+
+    @include u-hocus {
+        color: $color-link-hover;
+    }
+}
